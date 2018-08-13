@@ -1,6 +1,5 @@
 package Entities;
 
-import Main.Game;
 import Main.Handler;
 
 import java.awt.*;
@@ -10,6 +9,7 @@ public abstract class Entity
     protected float x,y; /// protected -> e ca si privat doar ca acele clase care extind Entities au acces la ea
     protected int width, height;
     protected Handler handler;
+    protected Rectangle bounds;
     public Entity(Handler handler, float x, float y, int width, int height)
     {
         this.handler = handler;
@@ -17,6 +17,7 @@ public abstract class Entity
         this.y = y;
         this.width=width;
         this.height=height;
+        bounds = new Rectangle(0,0,width,height); /// hit box-ul o sa fie toata entitatea
     }
     public abstract void update ( );
     public abstract void render (Graphics graph);

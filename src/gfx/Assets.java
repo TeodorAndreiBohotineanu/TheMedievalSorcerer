@@ -1,14 +1,50 @@
 package gfx;
 
+import javax.print.StreamPrintService;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-    private static final int Pwidth=80, Pheight=82, Ewidth=36 , Eheight=51, Bwidth =32, Bheight=22;
-    public static BufferedImage player, enemy, bat, eyebot, tree, grass,floor,air,clouds;
+    public static BufferedImage bat,eyebot,spike,tree,spike2,grass,tablea,tableb,tablec,tabled,floor,air,clouds,obstacles,sea,deepsea,dirt,blackFloor,ladder,ladder2;
+    public static BufferedImage[] player_right,player_left,player_ladder,player_attack_right,player_attack_left,_player_death,player_idle;
     public static void init ( ) /// incarca tot ce trebe pentru joc
     {
-        SpriteSheet Player = new SpriteSheet(ImageLoader.LoadImage("/textures/gnu-120x100.png"));
-        SpriteSheet Enemy = new SpriteSheet(ImageLoader.LoadImage("/textures/disciple-45x51.png"));
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.LoadImage("/textures/character.png"));
+        player_right = new BufferedImage[9];
+        player_right[0] = sheet.crop(20,717,24,51);
+        player_right[1] = sheet.crop(82,717,29,50);
+        player_right[2] = sheet.crop(146,717,29,50);
+        player_right[3] = sheet.crop(210,717,27,50);
+        player_right[4] = sheet.crop(273,717,28,51);
+        player_right[5] = sheet.crop(335,717,31,50);
+        player_right[6] = sheet.crop(401,717,28,51);
+        player_right[7] = sheet.crop(466,717,26,50);
+        player_right[8] = sheet.crop(530,717,27,51);
+        player_idle = new BufferedImage[4];
+        player_idle[0] = sheet.crop(16,141,33,54);
+        player_idle[1] = sheet.crop(80,141,33,53);
+        player_idle[2] = sheet.crop(145,141,30,53);
+        player_idle[3] = sheet.crop(205,141,39,53);
+        player_left = new BufferedImage[9];
+        player_left[0] = sheet.crop(20,589,26,52);
+        player_left[1] = sheet.crop(80,589,31,51);
+        player_left[2] = sheet.crop(146,589,28,51);
+        player_left[3] = sheet.crop(212,589,27,51);
+        player_left[4] = sheet.crop(276,589,28,51);
+        player_left[5] = sheet.crop(338,589,32,51);
+        player_left[6] = sheet.crop(403,589,29,51);
+        player_left[7] = sheet.crop(468,589,27,51);
+        player_left[8] = sheet.crop(532,589,26,51);
+        player_ladder = new BufferedImage[9];
+        player_ladder[0] = sheet.crop(16,524,33,53);
+        player_ladder[1] = sheet.crop(80,524,34,52);
+        player_ladder[2] = sheet.crop(144,524,33,52);
+        player_ladder[3] = sheet.crop(209,524,31,54);
+        player_ladder[4] = sheet.crop(272,524,33,53);
+        player_ladder[5] = sheet.crop(336,524,33,51);
+        player_ladder[6] = sheet.crop(400,524,33,53);
+        player_ladder[7] = sheet.crop(465,524,32,53);
+        player_ladder[8] = sheet.crop(528,524,33,52);
         SpriteSheet Bat = new SpriteSheet(ImageLoader.LoadImage("/textures/32x32-bat-sprite.png"));
         SpriteSheet EyeBot = new SpriteSheet(ImageLoader.LoadImage("/textures/eyebot.png"));
         SpriteSheet Tree = new SpriteSheet(ImageLoader.LoadImage("/textures/Tree.png"));
@@ -16,14 +52,38 @@ public class Assets {
         SpriteSheet Floor = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
         SpriteSheet Air = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
         SpriteSheet Clouds = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
-        player = Player.crop(15,13,Pwidth,Pheight);
-        enemy = Enemy.crop(1,2,Ewidth,Eheight);
-        bat = Bat.crop(65,3,Bwidth,Bheight);
+        SpriteSheet Obstacles = new SpriteSheet(ImageLoader.LoadImage("/textures/tentacles-25x90.png"));
+        SpriteSheet Sea = new SpriteSheet(ImageLoader.LoadImage("/textures/16x16 Tiles.png"));
+        SpriteSheet DeepSea = new SpriteSheet(ImageLoader.LoadImage("/textures/16x16 Tiles.png"));
+        SpriteSheet Dirt = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet BlackFloor = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Ladder = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Ladder2 = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Spike = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Tablea = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Tableb = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Tablec = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Spike2 = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        SpriteSheet Tabled = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
+        tableb = Tableb.crop(676,3,25,16);
+        tablec = Tablec.crop(16,96,25,16);
+        tabled = Tabled.crop(39,96,25,16);
+        ladder = Ladder.crop(0,96,16,16);
+        spike = Spike.crop(160,31,16,17);
+        ladder2 = Ladder2.crop(637,2,16,17);
+        blackFloor = BlackFloor.crop(64,120,32,24);
+        bat = Bat.crop(39,31,20,24);
         eyebot = EyeBot.crop (0,0,32,32);
         tree = Tree.crop(0,0,64,64);
         grass = Grass.crop(1,34,16,16);
+        tablea = Tablea.crop(652,3,25,16);
         floor = Floor.crop(0,112,64,32);
         air = Air.crop(0,410,71,30);
         clouds=Clouds.crop(606,400,54,36);
+        obstacles=Obstacles.crop(0,181,25,89);
+        sea=Sea.crop(1,51,16,16);
+        deepsea=DeepSea.crop(1,68,16,16);
+        spike2 = Spike2.crop(176,29,16,20);
+        dirt=Dirt.crop(272,96,32,32);
     }
 }

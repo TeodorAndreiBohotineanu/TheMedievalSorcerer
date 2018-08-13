@@ -1,8 +1,8 @@
 package Entities.Creatures;
 
 import Entities.Entity;
-import Main.Game;
 import Main.Handler;
+import Tiles.Tile;
 
 public abstract class Creature extends Entity
 {
@@ -10,8 +10,8 @@ public abstract class Creature extends Entity
     public static final float DEFAULT_SPEED=4.0f;
     public static final int DEFAULT_CREATURE_Enemy_WIDTH=36,
             DEFAULT_CREATURE_Enemy_HEIGHT=51;
-    public static final int DEFAULT_Player_WIDTH=80,
-            DEFAULT_Player_HEIGHT=82;
+    public static final int DEFAULT_Player_WIDTH=32,
+            DEFAULT_Player_HEIGHT=53;
     protected int HP;
     protected float Speed;
     protected float xMove, yMove;
@@ -25,8 +25,59 @@ public abstract class Creature extends Entity
     }
     public void Move ( )
     {
-        x+=xMove;
-        y+=yMove;
+        moveX();
+        moveY();
+    }
+    public void moveX(){
+        if(xMove > 0){//Moving right
+            int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TWIDTH;
+
+            if(!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TWIDTH) &&
+                    !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TWIDTH)){
+                x += xMove;
+            }else{
+                x = tx * Tile.TWIDTH - bounds.x - bounds.width - 1;
+            }
+
+        }else if(xMove < 0){//Moving left
+            int tx = (int) (x + xMove + bounds.x) / Tile.TWIDTH;
+
+            if(!collisionWithTile(tx, (int) (y + bounds.y) / Tile.TWIDTH) &&
+                    !collisionWithTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TWIDTH)){
+                x += xMove;
+            }else{
+                x = tx * Tile.TWIDTH + Tile.TWIDTH - bounds.x;
+            }
+
+        }
+    }
+
+    public void moveY(){
+        if(yMove < 0){//Up
+            int ty = (int) (y + yMove + bounds.y) / Tile.TWIDTH;
+
+            if(!collisionWithTile((int) (x + bounds.x) / Tile.TWIDTH, ty) &&
+                    !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TWIDTH, ty)){
+                y += yMove;
+            }else{
+                y = ty * Tile.THEIGHT + Tile.THEIGHT - bounds.y;
+            }
+
+        }else if(yMove > 0){//Down
+            int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.THEIGHT;
+
+            if(!collisionWithTile((int) (x + bounds.x) / Tile.THEIGHT, ty) &&
+                    !collisionWithTile((int) (x + bounds.x + bounds.width) / Tile.TWIDTH, ty)){
+                y += yMove;
+            }else{
+                y = ty * Tile.THEIGHT - bounds.y - bounds.height - 1;
+            }
+
+        }
+    }
+    protected boolean collisionWithTile (int x, int y)
+    {
+            return handler.getWorld().getTile(x,y).Solid();
     }
     /// Getters and Setters
     public int getHP() {

@@ -43,12 +43,12 @@ public class Game implements  Runnable
     }
     private void init  ( ) /// se va apela o singura data, va initializa display, fereastra si tot ce trebe
     {
+        handler = new Handler(this);
         gameState = new GameState(handler);
         MenuState= new MenuState(handler);
         State.SetState(gameState);
         Assets.init(); /// optimizare
-        gameCamera = new GameCamera(this,0,0);
-        handler = new Handler(this);
+        gameCamera = new GameCamera(handler,0,0);
 /// Game Loop
         /// Mai intai se face update la variabile, locatii, obiecte and so on
         /// Apoi pune totul in fereastra

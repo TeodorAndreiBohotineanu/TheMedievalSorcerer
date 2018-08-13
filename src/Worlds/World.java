@@ -35,6 +35,8 @@ public class World
     }
     public Tile getTile ( int x, int y )
     {
+        if (x < 0 || y < 0  || x >= width || y >= height )
+            return  Tile.grassTile; /// daca e afara din mapa, atunci ii default sa fie pe grass, ca sa nu dea erori
         Tile t = Tile.tiles[tiles[x][y]];
         if (t == null )
             return Tile.grassTile;
@@ -52,5 +54,13 @@ public class World
         for (int y=0;y<height;y++)
             for (int x=0;x<width;x++)
                 tiles[x][y]=Utils.parseInt(tokens[(x+y*width)+4]);
+    }
+    public int getWidth ( )
+    {
+        return width;
+    }
+    public int getHeight ( )
+    {
+        return height;
     }
 }

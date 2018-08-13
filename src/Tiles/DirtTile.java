@@ -2,10 +2,9 @@ package Tiles;
 
 import gfx.Assets;
 
-public class GrassTile extends  Tile {
-    public GrassTile(int id)
-    {
-        super(Assets.grass, id);
+public class DirtTile extends Tile {
+    public DirtTile(int id) {
+        super(Assets.dirt, id);
     }
     @Override
     public boolean Solid ( )
