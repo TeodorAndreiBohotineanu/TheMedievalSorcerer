@@ -6,26 +6,32 @@ import Tiles.Tile;
 
 public abstract class Creature extends Entity
 {
-    public static final int DEFAULT_HP=10;
-    public static final float DEFAULT_SPEED=4.0f;
+    public static final float DEFAULT_SPEED=3.5f;
     public static final int DEFAULT_CREATURE_Enemy_WIDTH=36,
             DEFAULT_CREATURE_Enemy_HEIGHT=51;
     public static final int DEFAULT_Player_WIDTH=32,
             DEFAULT_Player_HEIGHT=53;
-    protected int HP;
     protected float Speed;
     protected float xMove, yMove;
+        protected float maxMoveY;
+    protected float gravity;
+    protected boolean falling;
+    protected boolean jumping;
     public Creature(Handler handler, float x, float y, int width, int height)
     {
         super(handler,x, y,width,height); /// super duce la ce am dat extend, aici Entity
-        HP= DEFAULT_HP;
         Speed=DEFAULT_SPEED;
         xMove=0;
+        gravity = 0.5f;
         yMove=0;
     }
     public void Move ( )
     {
-        moveX();
+        if (!checkEntityCollisions(xMove,0f))
+        {
+            moveX();
+        }
+        if (!checkEntityCollisions(0f,yMove))
         moveY();
     }
     public void moveX(){

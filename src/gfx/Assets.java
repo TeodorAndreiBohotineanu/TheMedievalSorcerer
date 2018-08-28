@@ -5,8 +5,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
-    public static BufferedImage bat,eyebot,spike,tree,spike2,grass,tablea,tableb,tablec,tabled,floor,air,clouds,obstacles,sea,deepsea,dirt,blackFloor,ladder,ladder2;
-    public static BufferedImage[] player_right,player_left,player_ladder,player_attack_right,player_attack_left,_player_death,player_idle;
+    public static BufferedImage bat,background,button_start,eyebot,spike,tree,spike2,grass,tablea,tableb,tablec,tabled,floor,air,clouds,obstacles,sea,deepsea,dirt,blackFloor,ladder,ladder2;
+    public static BufferedImage[] player_right,player_left,player_ladder,player_attack_right,player_attack_left,player_death,player_idle;
     public static void init ( ) /// incarca tot ce trebe pentru joc
     {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.LoadImage("/textures/character.png"));
@@ -45,8 +45,30 @@ public class Assets {
         player_ladder[6] = sheet.crop(400,524,33,53);
         player_ladder[7] = sheet.crop(465,524,32,53);
         player_ladder[8] = sheet.crop(528,524,33,52);
+        player_attack_left = new BufferedImage[6];
+        player_attack_left[0] = sheet.crop(7,845,39,51);
+        player_attack_left[1] = sheet.crop(80,845,28,50);
+        player_attack_left[2] = sheet.crop(145,845,29,53);
+        player_attack_left[3] = sheet.crop(201,845,38,53);
+        player_attack_left[4] = sheet.crop(255,845,47,52);
+        player_attack_left[5] = sheet.crop(320,845,45,52);
+        player_attack_right = new BufferedImage[6];
+        player_attack_right[0] = sheet.crop(19,972,38,54);
+        player_attack_right[1] = sheet.crop(85,972,28,53);
+        player_attack_right[2] = sheet.crop(147,972,30,53);
+        player_attack_right[3] = sheet.crop(210,972,37,54);
+        player_attack_right[4] = sheet.crop(276,972,46,54);
+        player_attack_right[5]= sheet.crop(339,972,47,53);
+        player_death = new BufferedImage[5];
+        player_death[0] = sheet.crop(16,1293,33,51);
+        player_death[1] = sheet.crop(81,1294,37,50);
+        player_death[2] = sheet.crop(145,1300,34,43);
+        player_death[3] = sheet.crop(209,1305,34,37);
+        player_death[4] = sheet.crop(273,1310,35,33);
+        SpriteSheet Background = new SpriteSheet(ImageLoader.LoadImage("/textures/braun_hogenber.jpg"));
         SpriteSheet Bat = new SpriteSheet(ImageLoader.LoadImage("/textures/32x32-bat-sprite.png"));
         SpriteSheet EyeBot = new SpriteSheet(ImageLoader.LoadImage("/textures/eyebot.png"));
+        SpriteSheet ButtonStart = new SpriteSheet(ImageLoader.LoadImage("/textures/medieval_sprite.png"));
         SpriteSheet Tree = new SpriteSheet(ImageLoader.LoadImage("/textures/Tree.png"));
         SpriteSheet Grass = new SpriteSheet(ImageLoader.LoadImage("/textures/16x16 Tiles.png"));
         SpriteSheet Floor = new SpriteSheet(ImageLoader.LoadImage("/textures/omegateam.png"));
@@ -79,11 +101,13 @@ public class Assets {
         tablea = Tablea.crop(652,3,25,16);
         floor = Floor.crop(0,112,64,32);
         air = Air.crop(0,410,71,30);
-        clouds=Clouds.crop(606,400,54,36);
-        obstacles=Obstacles.crop(0,181,25,89);
-        sea=Sea.crop(1,51,16,16);
-        deepsea=DeepSea.crop(1,68,16,16);
+        clouds = Clouds.crop(606,400,54,36);
+        obstacles = Obstacles.crop(0,181,25,89);
+        sea = Sea.crop(1,51,16,16);
+        deepsea = DeepSea.crop(1,68,16,16);
         spike2 = Spike2.crop(176,29,16,20);
-        dirt=Dirt.crop(272,96,32,32);
+        dirt = Dirt.crop(272,96,32,32);
+        button_start = ButtonStart.crop(0,576,129,64);
+        background = Background.crop(0,0,1280,720);
     }
 }
